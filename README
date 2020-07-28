@@ -1,0 +1,2 @@
+This repo contains a stripped, patched version of Lua 3.2 that only compiles.
+It is wrapped by thorncompiler.c
