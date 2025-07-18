@@ -20,3 +20,8 @@ add_library (thorncompiler SHARED
 )
 target_include_directories(thorncompiler PUBLIC "include" "lua/include" "lua/src")
 
+if(${CMAKE_SYSTEM_NAME} MATCHES "Windows" AND ${CMAKE_CXX_COMPILER_ID} MATCHES "GNU")
+    # link libgcc/libstdc++ into our .dll
+    target_link_options(thorncompiler PRIVATE -static-libgcc -static)
+endif()
+
