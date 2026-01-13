@@ -46,7 +46,8 @@ static void fswrite(void *ptr, size_t size, size_t count, byteStream *stream)
 }
 static void fsputs(const char *str, byteStream *stream)
 {
-    for(int i = 0; i < strlen(str); i++)
+    size_t len = strlen(str);
+    for(size_t i = 0; i < len; i++)
         fsputc(str[i], stream);
 }
 static void byteStream_fini(byteStream *stream, unsigned char **outputBuffer, int *outputSize)

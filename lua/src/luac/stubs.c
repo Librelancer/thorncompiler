@@ -39,10 +39,10 @@ char *luac_geterror()
 
 void lua_error(char* s)
 {
-    char errbuf[4096];
+    char errbuf[4097];
     if (s) {
         haserror = 1;
-        snprintf(errbuf, 4096, "%s\n%s", largebuf, s);
+        snprintf(errbuf, 4097, "%s\n%s", largebuf, s);
         strcpy(largebuf, errbuf);
     }
 }

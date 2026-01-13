@@ -27,7 +27,7 @@ static Opcode Fake[]=			/* ORDER luac.h */
 { "VARARGS", VARARGS, VARARGS, ARGS_B, -1, -1 },
 };
 
-#define NOPCODES	(sizeof(Info)/sizeof(Info[0]))
+#define NOPCODES	(int)(sizeof(Info)/sizeof(Info[0]))
 
 int luaU_opcodeinfo(TProtoFunc* tf, Byte* p, Opcode* I, char* xFILE, int xLINE)
 {

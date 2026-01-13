@@ -128,7 +128,7 @@ static void constructor (LexState *ls);
 static void decinit (LexState *ls, listdesc *d);
 static void exp0 (LexState *ls, vardesc *v);
 static void exp1 (LexState *ls);
-static void exp2 (LexState *ls, vardesc *v);
+static void expTwo (LexState *ls, vardesc *v);
 static void explist (LexState *ls, listdesc *e);
 static void explist1 (LexState *ls, listdesc *e);
 static void ifpart (LexState *ls, int line);
@@ -950,15 +950,15 @@ static void exp1 (LexState *ls) {
 
 
 static void exp0 (LexState *ls, vardesc *v) {
-  /* exp0 -> exp2 {(AND | OR) exp2} */
-  exp2(ls, v);
+  /* exp0 -> expTwo {(AND | OR) expTwo} */
+  expTwo(ls, v);
   while (ls->token == AND || ls->token == OR) {
     int op = (ls->token == AND) ? ONFJMP : ONTJMP;
     int pc;
     lua_pushvar(ls, v);
     next(ls);
     pc = SaveWordPop(ls);
-    exp2(ls, v);
+    expTwo(ls, v);
     lua_pushvar(ls, v);
     fix_jump(ls, pc, op, ls->fs->pc);
   }
@@ -1043,7 +1043,7 @@ static void prefixexp (LexState *ls, vardesc *v, stack_op *s) {
 }
 
 
-static void exp2 (LexState *ls, vardesc *v) {
+static void expTwo (LexState *ls, vardesc *v) {
   stack_op s;
   int op;
   s.top = 0;

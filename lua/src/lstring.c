@@ -6,6 +6,7 @@
 
 
 #include <string.h>
+#include <stdint.h>
 
 #include "lmem.h"
 #include "lobject.h"
@@ -168,7 +169,7 @@ static TaggedString *insert_u (void *buff, int tag, stringtable *tb) {
 
 
 TaggedString *luaS_createudata (void *udata, int tag) {
-  int t = ((unsigned)udata%NUM_HASHUDATA)+NUM_HASHSTR;
+  int t =  (int)(((uintptr_t)udata%NUM_HASHUDATA) + NUM_HASHSTR);
   return insert_u(udata, tag, &L->string_root[t]);
 }
 
